@@ -21,16 +21,15 @@ builder.Services.AddScoped<IHttpClientStackOverflow, HttpClientStackOverflow>();
 
 builder.Services.AddMudServices(config =>
 {
-    config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.TopCenter;
+    config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomCenter;
 
     config.SnackbarConfiguration.PreventDuplicates = false;
     config.SnackbarConfiguration.NewestOnTop = true;
     config.SnackbarConfiguration.ShowCloseIcon = false;
     config.SnackbarConfiguration.VisibleStateDuration = 5000;
-    config.SnackbarConfiguration.HideTransitionDuration = 500;
-    config.SnackbarConfiguration.ShowTransitionDuration = 500;
-    config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
-    config.SnackbarConfiguration.MaxDisplayedSnackbars = 1;
+    config.SnackbarConfiguration.HideTransitionDuration = 250;
+    config.SnackbarConfiguration.ShowTransitionDuration = 250;
+    config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;    
 });
 
 var app = builder.Build();

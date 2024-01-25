@@ -37,9 +37,10 @@ namespace AcccuLynx.StackOverflow
 
             bool hasMoreResults = false;
             int pagenumber = 1;
+            int requiredAnswers = _config.GetValue<int>("MinimumAnswersRequired");
             do
             {
-                var response = await _client.GetAsync($"questions?page_size=100&page={pagenumber}&fromdate={searchstartdate}&todate={today}&site=stackoverflow");
+                var response = await _client.GetAsync($"questions?page_size=100&page={pagenumber}&fromdate={searchstartdate}&todate={today}&site=stackoverflow&order=desc&sort=activity");
 
                 response.EnsureSuccessStatusCode();
 
@@ -47,12 +48,11 @@ namespace AcccuLynx.StackOverflow
                 {
                     var stream = await response.Content.ReadAsStreamAsync();
                     var questions = await JsonSerializer.DeserializeAsync<QuestionResults>(stream, _options);
-
-                    hasMoreResults = questions.has_more;
-
+                    
                     if (questions != null)
                     {
-                        filtered.AddRange(questions.items.Where(items => items.accepted_answer_id != 0 && items.answer_count > 1).ToList());
+                        hasMoreResults = questions.has_more;
+                        filtered.AddRange(questions.items.Where(items => items.accepted_answer_id != 0 && items.answer_count >= requiredAnswers).ToList());
                     }
                     if (filtered?.Count >= _config.GetValue<int>("QuestionsToDisplay"))
                         break;

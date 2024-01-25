@@ -27,7 +27,7 @@ namespace AccuLynx.Components.Pages
         {
             bool correct = await IsThisTheAcceptedAnswer((int)value);           
             if(correct)
-               Snackbar.Add(@"You have identified the Accepted Answer", Severity.Success, config => { config.ActionColor = Color.Success; });            
+               Snackbar.Add(@"You have identified the Accepted Answer", Severity.Success);            
             else
                Snackbar.Add(@"That is not the Accepted Answer", Severity.Error);            
         }
