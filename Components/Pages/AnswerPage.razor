@@ -1,0 +1,18 @@
+﻿@page "/answers/{QuestionId:int}"
+@rendermode InteractiveServer
+@inject ISnackbar Snackbar
+
+<MudSnackbarProvider></MudSnackbarProvider>
+
+<PageTitle>Answers</PageTitle>
+
+<h1>Click on the answer you think is the Accepted Answer</h1>
+
+<MudList Clickable="true" Dense="true" DisableGutters="false" SelectedValueChanged="OnSelectedValueChanged">
+    @foreach (var pytrm in @answers)
+    {
+        <MudListItem Text="@pytrm.body" Value="@pytrm.answer_id"  />
+    }
+</MudList>
+
+

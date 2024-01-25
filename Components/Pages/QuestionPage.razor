@@ -1,0 +1,20 @@
+﻿@page "/"
+
+@inject NavigationManager NavManager
+
+<PageTitle>Challenge</PageTitle>
+
+<h1>Are you smarter than StackOverflow ?</h1>
+
+Select a question to view it's answers:
+
+<MudTable Items="@questions" Hover="true" Breakpoint="Breakpoint.Sm" T="Question">
+    <HeaderContent>            
+        <MudTh>Name</MudTh>            
+    </HeaderContent>
+    <RowTemplate>           
+        <MudTd DataLabel="Name">
+            <MudLink Href="@($"answers/{@context.question_id}")">@context.title</MudLink>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
