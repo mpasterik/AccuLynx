@@ -1,1 +1,1 @@
-# AccuLynx
+# AccuLynx Code Challenge
